@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "Roboto Condensed";
+  src: url("../assets/fonts/RobotoCondensed-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900; /* Définit l'étendue des poids pour une font variable */
+  font-style: normal;
+}
+
+:root {
+  --bulma-warning-rgb: 248, 184, 86;
+  --bulma-warning-h: 34deg;
+  --bulma-warning-s: 92%;
+  --font-primary: "Roboto Condensed", sans-serif !important;
+  --font-body-family: "Roboto Condensed", sans-serif !important;
+}
+
+
+
+html, body {
+  font-family: var(--font-primary) !important;
+}

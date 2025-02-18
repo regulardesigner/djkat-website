@@ -1,0 +1,8 @@
+.dj-kat-soundcloud-player__iframe {
+  border: none;
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 400px;
+  aspect-ratio: 1/1;
+}
