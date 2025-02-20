@@ -1,6 +1,6 @@
 function Biography() {
   return (
-    <div className="columns mb-6">
+    <div className="columns is-0-mobile mb-6">
       <div className="column is-half">
         <h2 className='is-size-3 has-text-weight-bold'>Biography:</h2>
         

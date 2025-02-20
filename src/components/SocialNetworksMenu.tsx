@@ -42,7 +42,7 @@ function SocialNetworkMenu() {
       {socialNetworks.map((socialNetwork) => (
         <a
           key={socialNetwork.name}
-          className="button is-rounded m-2"
+          className="button is-rounded is-full-on-mobile m-1"
           href={socialNetwork.url}
           target="_blank"
           rel="noreferrer"

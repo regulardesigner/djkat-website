@@ -11,8 +11,8 @@ import "bulma/css/bulma.min.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Header />
-    <App />
-    <Footer />
+      <Header />
+      <App />
+      <Footer />
   </StrictMode>,
 );

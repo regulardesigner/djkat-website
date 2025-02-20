@@ -19,24 +19,26 @@ function App() {
     <>
       <SocialNetworkMenu />
       
-      <main className='container mb-5'>
+      <main className='container px-2 mb-5'>
         
         <Biography />
 
         <h2 className='is-size-3 has-text-weight-bold mb-1'>Last Releases:</h2>
 
-        <div className="columns is-multiline">
+        <div className="columns is-0-mobile is-multiline is-justify-content-center">
 
           {
             // render a SoundcloudPlayer for each trackId
             trackIds.map((trackId) => (
-              <div key={trackId} className="column is-one-quarter">
-                <SoundcloudPlayer trackId={trackId} />
+              <div key={trackId} className="column is-one-quarter is-full-mobile">
+                <SoundcloudPlayer trackId={trackId} className="p-2" />
               </div>
             ))
           }
 
-          <a className='column is-two-quarter is-flex is-justify-content-center is-align-items-center has-background-warning m-3 has-text-primary-invert is-size-4 has-text-weight-bold' target='_blank' href="https://soundcloud.com/dj_kat_official">Listen more on soundcloud</a>
+          <div className="column is-two-quarter is-full-mobile">
+            <a className='soundcloud-djkat-link p-2 has-text-primary-invert is-size-4 has-text-weight-bold has-background-warning is-flex is-justify-content-center is-align-items-center' target='_blank' href="https://soundcloud.com/dj_kat_official">Listen more on soundcloud</a>
+          </div>
         </div>
       </main >
     </>
