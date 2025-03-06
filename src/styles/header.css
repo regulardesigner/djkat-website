@@ -1,5 +1,23 @@
+:root {
+  --banner-image: url(../assets/djkat_banner.jpg);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    /* add url to light theme background image */
+    /* --banner-image: url(../assets/djkat_banner_light.jpg); */
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* add url to dark theme background image */
+    /* --banner-image: url(../assets/djkat_banner_dark.jpg); */
+  }
+}
+
 .hero-djkat {
-  background-image: url(../assets/djkat_banner.jpg);
+  background-image: var(--banner-image);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

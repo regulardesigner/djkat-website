@@ -13,7 +13,25 @@
   --font-body-family: "Roboto Condensed", sans-serif !important;
 }
 
+/* Utility classes */
+.w-100 {
+  width: 100%;
+}
 
+.min-width-200px {
+  min-width: 200px;
+}
+
+.is-gap-2 {
+  gap: 0.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .is-full-width-mobile {
+    width: 100%;
+    margin: 0.25rem 0 !important;
+  }
+}
 
 html, body {
   font-family: var(--font-primary) !important;
