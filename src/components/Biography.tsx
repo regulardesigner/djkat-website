@@ -1,6 +1,6 @@
 function Biography() {
   return (
-    <div className="columns is-0-mobile mb-6">
+    <section data-testid="biography-section" className="biography columns is-0-mobile mb-6">
       <div className="column is-half">
         <h2 className='is-size-3 has-text-weight-bold'>Biography:</h2>
         
@@ -16,7 +16,7 @@ function Biography() {
           synthesizers and drum machines. His influences include icons 
           such as Thomas Bangalter, DJ Falcon, Olav Basoski and Phats & Small...</p>
       </div>
-    </div>
+    </section>
   )
 }
 

@@ -12,7 +12,7 @@ function CustomNotification({
   title, 
   body, 
   onClose, 
-  duration = 5000,
+  duration = 8000,
   type = 'info' 
 }: CustomNotificationProps) {
   useEffect(() => {
@@ -24,14 +24,13 @@ function CustomNotification({
   }, [duration, onClose]);
 
   const getTypeClass = () => {
-    switch (type) {
-      case 'success':
-        return 'has-background-success';
-      case 'error':
-        return 'has-background-danger';
-      default:
-        return 'has-background-info';
-    }
+    const typeClasses = {
+      'success': 'has-background-success',
+      'error': 'has-background-danger',
+      'info': 'has-background-info'
+    };
+    
+    return typeClasses[type] || 'has-background-info';
   };
 
   return (

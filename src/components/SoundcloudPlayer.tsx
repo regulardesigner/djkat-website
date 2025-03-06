@@ -23,7 +23,7 @@ function SoundcloudPlayer({ trackId }: TrackId) {
 
   //TODO: Accessibility: display a player name with the artist name and track name.
   return (
-    <div className="dj-kat-soundcloud-player is-flex is-justify-content-center is-align-items-center">
+    <div data-testid={`soundcloud-player-${trackId}`} className="dj-kat-soundcloud-player is-flex is-justify-content-center is-align-items-center">
       <iframe
         className="dj-kat-soundcloud-player__iframe"
         width="400"

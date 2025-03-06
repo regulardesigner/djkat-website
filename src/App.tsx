@@ -1,9 +1,9 @@
-import Biography from '@components/Biography';
-import SoundcloudPlayer from '@components/SoundcloudPlayer';
-import SocialNetworkMenu from '@components/SocialNetworksMenu';
-import NotificationContainer from '@components/NotificationContainer';
+import Biography from './components/Biography';
+import SoundcloudPlayer from './components/SoundcloudPlayer';
+import SocialNetworkMenu from './components/SocialNetworksMenu';
+import NotificationContainer from './components/NotificationContainer';
 import { useEffect } from 'react';
-import { tracks } from '@/data/tracks';
+import { tracks } from './data/tracks';
 
 function App() {
 
@@ -12,7 +12,7 @@ function App() {
     const timer = setTimeout(() => {
       if ((window as any).showCustomNotification) {
         (window as any).showCustomNotification({
-          title: 'Welcome to DJ KAT! 🎵',
+          title: 'Welcome French-Touch Lovers! 🎵',
           body: 'Thank you for visiting! Enjoy the music.',
           type: 'info',
         });
