@@ -27,7 +27,7 @@ function CustomNotification({
     const typeClasses = {
       'success': 'has-background-success',
       'error': 'has-background-danger',
-      'info': 'has-background-info'
+      'info': 'has-background-warning'
     };
     
     return typeClasses[type] || 'has-background-info';

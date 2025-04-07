@@ -2,14 +2,14 @@ import Biography from './components/Biography';
 import SoundcloudPlayer from './components/SoundcloudPlayer';
 import SocialNetworkMenu from './components/SocialNetworksMenu';
 import NotificationContainer from './components/NotificationContainer';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { tracks } from './data/tracks';
 
 function App() {
+  const notificationShown = useRef(false);
 
   useEffect(() => {
-    // Add a small delay to ensure the notification system is ready
-    const timer = setTimeout(() => {
+    if (!notificationShown.current) {
       if ((window as any).showCustomNotification) {
         (window as any).showCustomNotification({
           title: 'Welcome French-Touch Lovers! 🎵',
@@ -17,9 +17,8 @@ function App() {
           type: 'info',
         });
       }
-    }, 100);
-
-    return () => clearTimeout(timer);
+      notificationShown.current = true;
+    }
   }, []);
   
   return (

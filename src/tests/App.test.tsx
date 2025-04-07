@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import App from './App';
-import { tracks } from './data/tracks';
+import App from '../App';
+import { tracks } from '../data/tracks';
 
 // Mock the window.showCustomNotification function
 const mockShowCustomNotification = vi.fn();

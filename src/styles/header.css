@@ -1,18 +1,22 @@
 :root {
-  --banner-image: url(../assets/djkat_banner.jpg);
+  --banner-image: url(../assets/djkat_banner.png);
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    /* add url to light theme background image */
     /* --banner-image: url(../assets/djkat_banner_light.jpg); */
   }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* add url to dark theme background image */
     /* --banner-image: url(../assets/djkat_banner_dark.jpg); */
+  }
+}
+
+@media (max-width: 64rem) {
+  .hero-djkat {
+      height: 15rem;
   }
 }
 

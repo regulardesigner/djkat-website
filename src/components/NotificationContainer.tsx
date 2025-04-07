@@ -14,7 +14,9 @@ function NotificationContainer() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
 
   const addNotification = (notification: Omit<Notification, 'id'>) => {
-    const id = Math.random().toString(36).substr(2, 9);
+    // generate a random identifier for the notification
+    const id = Math.random().toString(36).substring(2, 9);
+    
     setNotifications(prev => [...prev, { ...notification, id }]);
   };
 
