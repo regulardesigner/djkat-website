@@ -25,7 +25,7 @@ function App() {
     <div className="app">
       <NotificationContainer />
       <SocialNetworkMenu />
-      <main className='container px-2 mb-5'>
+      <main className='container px-4 mb-5'>
         <Biography />
         <h2 className='is-size-3 has-text-weight-bold mb-1'>Last Releases:</h2>
         <div className="columns is-0-mobile is-multiline is-justify-content-center">

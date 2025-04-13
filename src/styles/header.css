@@ -14,9 +14,25 @@
   }
 }
 
+.djkat-logo {
+  display: flex;
+}
+
+.image-logo {
+  width: auto;
+  max-height: 15rem;
+  margin: 0 auto;
+}
+
 @media (max-width: 64rem) {
   .hero-djkat {
-      height: 15rem;
+    height: 16rem;
+    background-image: cover;
+  }
+
+  .image-logo {
+    width: auto;
+    max-height: 12rem;
   }
 }
 
