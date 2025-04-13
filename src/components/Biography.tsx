@@ -2,8 +2,8 @@ import PhotosSlider from "./PhotosSlider";
 
 function Biography() {
   return (
-    <section data-testid="biography-section" className="biography columns is-align-items-center is-0-mobile mb-6">
-      <div className="column">
+    <section data-testid="biography-section" className="biography columns is-align-items-center is-0-mobile has-text-current mb-6">
+      <div className="column is-size-5">
         <h2 className='is-size-3 has-text-weight-bold'>Biography:</h2>
         
         <p className='mb-4'>DJ KAT is already making his mark 

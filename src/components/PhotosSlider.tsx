@@ -36,7 +36,7 @@ function PhotosSlider() {
   }
 
   function autoSlider() {
-    const interval = setInterval(goNextSlide, 5000);
+    const interval = setInterval(goNextSlide, 15000);
     return () => clearInterval(interval);
   }
 
@@ -61,14 +61,14 @@ function PhotosSlider() {
         className="slider-button prev"
         aria-label="Previous slide"
       >
-        ←
+        previous photo
       </button>
       <button
         onClick={goNextSlide}
         className="slider-button next"
         aria-label="Next slide"
       >
-        →
+        next photo
       </button>
       <div className="slider-dots">
         {images.map((_, index) => (

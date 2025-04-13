@@ -8,7 +8,7 @@ function SocialNetworkMenu() {
         {socialNetworks.map((socialNetwork) => (
           <a
             key={socialNetwork.name}
-            className="button is-large is-rounded is-warning is-outlined has-text-warning-invert is-flex is-justify-content-center is-align-items-center min-width-200px is-full-width-mobile"
+            className="button is-large is-rounded is-warning is-outlined is-flex is-justify-content-center is-align-items-center min-width-200px is-full-width-mobile"
             href={socialNetwork.url}
             target="_blank"
             rel="noreferrer"

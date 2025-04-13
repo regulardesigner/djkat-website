@@ -30,11 +30,16 @@
 
 .slider-button {
   position: absolute;
+  width: 2rem;
+  height: 2rem;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
+  background-image: url('../assets/button-circle-round-arrow-next.svg');
+  background-size: cover;
+  background-color: rgba(255, 255, 255, 0.7);
   padding: 8px;
+  font-size: 0px;
+  text-indent: -1000;
   border-radius: 50%;
   border: none;
   cursor: pointer;
@@ -42,15 +47,16 @@
 }
 
 .slider-button:hover {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(255, 255, 255, 1);
 }
 
 .slider-button.prev {
-  left: 16px;
+  transform: rotate(0.5turn) translateY(50%);
+  left: 8px;
 }
 
 .slider-button.next {
-  right: 16px;
+  right: 8px;
 }
 
 .slider-dots {
