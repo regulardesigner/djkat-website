@@ -1,9 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ReactSwipe from 'react-swipe';
+
 import djKat from '@assets/image-slider/dj_kat.png';
 import djKatStudio from '@assets/image-slider/dj_kat_studio.png';
 import djSetTremplin from '@assets/image-slider/dj_set_tremplin.png';
 import djSetSceneOuverte from '@assets/image-slider/dj_set_scene_ouverte.png';
+
 import './PhotosSlider.css';
 
 const images = [
@@ -27,13 +29,21 @@ const images = [
 
 function PhotosSlider() {
   const swipeRef = useRef<ReactSwipe>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   function goNextSlide() {
+    setCurrentIndex(index => index + 1);
     swipeRef.current?.next();
   }
 
   function goPreviousSlide() {
+    setCurrentIndex(index => index - 1);
     swipeRef.current?.prev();
+  }
+
+  function goToSlide(index: number) {
+    setCurrentIndex(index);
+    swipeRef.current?.slide(index, 0);
   }
 
   function autoSlider() {
@@ -53,12 +63,14 @@ function PhotosSlider() {
         swipeOptions={{
           continuous: true,
           auto: 15000,
-          disableScroll: true,
-          stopPropagation: true
+          disableScroll: false,
+          stopPropagation: false,
+          speed: 500,
+          startSlide: 0,
         }}
       >
         {images.map((image, index) => (
-          <div key={index}>
+          <div key={index} style={{ width: '100%', height: '100%' }}>
             <img
               src={image.src}
               alt={image.alt}
@@ -85,8 +97,8 @@ function PhotosSlider() {
         {images.map((_, index) => (
           <button
             key={index}
-            onClick={() => swipeRef.current?.slide(index)}
-            className={`slider-dot ${swipeRef.current?.getPos() === index ? 'active' : 'inactive'}`}
+            onClick={() => goToSlide(index)}
+            className={`slider-dot ${index === currentIndex ? 'active' : 'inactive'}`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}

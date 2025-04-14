@@ -3,7 +3,7 @@ import PhotosSlider from "./PhotosSlider";
 function Biography() {
   return (
     <section data-testid="biography-section" className="biography columns is-align-items-center is-0-mobile has-text-current mb-6">
-      <div className="column is-size-5">
+      <div className="column is-half is-size-5">
         <h2 className='is-size-3 has-text-weight-bold'>Biography:</h2>
         
         <p className='mb-4'>DJ KAT is already making his mark 
@@ -18,7 +18,7 @@ function Biography() {
           synthesizers and drum machines. His influences include icons 
           such as Thomas Bangalter, DJ Falcon, Olav Basoski and Phats & Small...</p>
       </div>
-      <div className="column">
+      <div className="column is-half">
         <PhotosSlider />
       </div>
     </section>
