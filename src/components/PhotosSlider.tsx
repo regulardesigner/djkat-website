@@ -57,7 +57,7 @@ function PhotosSlider() {
 
   useEffect(() => {
     return autoSlider();
-  }, []);
+  });
 
   return (
     <div className="slider-container">
@@ -71,9 +71,6 @@ function PhotosSlider() {
           stopPropagation: false,
           speed: 500,
           startSlide: 0,
-          callback: (index: number) => {
-            setCurrentIndex(index);
-          }
         }}
       >
         {images.map((image, index) => (
