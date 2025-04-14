@@ -27,17 +27,21 @@ const images = [
   }
 ];
 
+
 function PhotosSlider() {
-  const swipeRef = useRef<ReactSwipe>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  
+  const swipeRef = useRef<ReactSwipe>(null);
 
   function goNextSlide() {
-    setCurrentIndex(index => index + 1);
+    const nextIndex = (currentIndex + 1) % images.length;
+    setCurrentIndex(nextIndex); 
     swipeRef.current?.next();
   }
 
   function goPreviousSlide() {
-    setCurrentIndex(index => index - 1);
+    const prevIndex = (currentIndex - 1 + images.length) % images.length;
+    setCurrentIndex(prevIndex);
     swipeRef.current?.prev();
   }
 
@@ -47,13 +51,13 @@ function PhotosSlider() {
   }
 
   function autoSlider() {
-    const interval = setInterval(goNextSlide, 15000);
+    const interval = setInterval(goNextSlide, 1500);
     return () => clearInterval(interval);
   }
 
   useEffect(() => {
     return autoSlider();
-  }, []);
+  });
 
   return (
     <div className="slider-container">
@@ -98,7 +102,7 @@ function PhotosSlider() {
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`slider-dot ${index === currentIndex ? 'active' : 'inactive'}`}
+            className={`slider-dot slider-dot-${index} ${currentIndex === index ? 'active' : 'inactive'}`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
