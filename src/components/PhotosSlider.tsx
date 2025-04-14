@@ -97,16 +97,6 @@ function PhotosSlider() {
       >
         next photo
       </button>
-      <div className="slider-dots">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`slider-dot slider-dot-${index} ${currentIndex === index ? 'active' : 'inactive'}`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
-      </div>
     </div>
   );
 }
