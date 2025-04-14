@@ -30,7 +30,7 @@ const images = [
 
 function PhotosSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  
+
   const swipeRef = useRef<ReactSwipe>(null);
 
   function goNextSlide() {
@@ -51,7 +51,7 @@ function PhotosSlider() {
   }
 
   function autoSlider() {
-    const interval = setInterval(goNextSlide, 1500);
+    const interval = setInterval(goNextSlide, 15000);
     return () => clearInterval(interval);
   }
 
