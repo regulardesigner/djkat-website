@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
+import ReactSwipe from 'react-swipe';
 import djKat from '@assets/image-slider/dj_kat.png';
 import djKatStudio from '@assets/image-slider/dj_kat_studio.png';
 import djSetTremplin from '@assets/image-slider/dj_set_tremplin.png';
@@ -25,14 +26,14 @@ const images = [
 ];
 
 function PhotosSlider() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const swipeRef = useRef<ReactSwipe>(null);
 
   function goNextSlide() {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    swipeRef.current?.next();
   }
 
   function goPreviousSlide() {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+    swipeRef.current?.prev();
   }
 
   function autoSlider() {
@@ -46,16 +47,26 @@ function PhotosSlider() {
 
   return (
     <div className="slider-container">
-      <div className="slider-wrapper">
+      <ReactSwipe
+        ref={swipeRef}
+        className="slider-wrapper"
+        swipeOptions={{
+          continuous: true,
+          auto: 15000,
+          disableScroll: true,
+          stopPropagation: true
+        }}
+      >
         {images.map((image, index) => (
-          <img
-            key={index}
-            src={image.src}
-            alt={image.alt}
-            className={`slider-image ${index === currentIndex ? 'visible' : 'hidden'}`}
-          />
+          <div key={index}>
+            <img
+              src={image.src}
+              alt={image.alt}
+              className="slider-image"
+            />
+          </div>
         ))}
-      </div>
+      </ReactSwipe>
       <button
         onClick={goPreviousSlide}
         className="slider-button prev"
@@ -74,8 +85,8 @@ function PhotosSlider() {
         {images.map((_, index) => (
           <button
             key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`slider-dot ${index === currentIndex ? 'active' : 'inactive'}`}
+            onClick={() => swipeRef.current?.slide(index)}
+            className={`slider-dot ${swipeRef.current?.getPos() === index ? 'active' : 'inactive'}`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}

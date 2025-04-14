@@ -1,5 +1,6 @@
 import '@styles/header.css';
-import djkatLogo from '@assets/djkat_text.png'
+
+import djkatLogo from '@assets/djkat_logo.png'
 
 function Header() {
   return (
