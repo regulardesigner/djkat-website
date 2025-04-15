@@ -5,7 +5,7 @@ import { ghPages } from 'vite-plugin-gh-pages'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/djkat-website/',
+  base: '/',
   plugins: [react(), ghPages()],
   resolve: {
     alias: {
