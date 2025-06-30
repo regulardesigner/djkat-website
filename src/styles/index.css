@@ -1,6 +1,7 @@
 @font-face {
   font-family: "Roboto Condensed";
-  src: url("../assets/fonts/RobotoCondensed-VariableFont_wght.ttf") format("truetype");
+  src: url("../assets/fonts/RobotoCondensed-VariableFont_wght.ttf")
+    format("truetype");
   font-weight: 100 900; /* Définit l'étendue des poids pour une font variable */
   font-style: normal;
 }
@@ -33,7 +34,8 @@
   }
 }
 
-html, body {
+html,
+body {
   font-family: var(--font-primary) !important;
 }
 

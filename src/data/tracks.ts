@@ -10,4 +10,4 @@ export const tracks: Track[] = [
   { id: "1997397563", title: "Feel so good" },
   { id: "1955115635", title: "The starry sky" },
   { id: "1938287549", title: "The knight" },
-]; 
+];

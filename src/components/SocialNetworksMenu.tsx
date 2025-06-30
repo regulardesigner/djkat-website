@@ -1,5 +1,5 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { socialNetworks } from '@/data/socialNetworks';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { socialNetworks } from "@/data/socialNetworks";
 
 function SocialNetworkMenu() {
   return (

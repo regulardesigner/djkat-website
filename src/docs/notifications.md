@@ -1,20 +1,23 @@
 # Custom Notification System Documentation
 
 ## Overview
+
 The notification system provides a flexible way to show custom-styled notifications in your application. It uses a custom React component that displays notifications in the top-right corner of the screen.
 
 ## Installation
+
 The notification system is already set up in your project. No additional installation is required.
 
 ## Basic Usage
 
 ### 1. Show a Notification
+
 ```typescript
 // Using the global method
 (window as any).showCustomNotification({
-  title: 'Your Title',
-  body: 'Your message here',
-  type: 'success', // 'success', 'error', or 'info'
+  title: "Your Title",
+  body: "Your message here",
+  type: "success", // 'success', 'error', or 'info'
   duration: 5000, // Duration in milliseconds (default: 5000)
 });
 ```
@@ -25,38 +28,41 @@ The notification function accepts the following options:
 
 ```typescript
 interface NotificationOptions {
-  title: string;      // The title of the notification
-  body: string;       // The message content
-  type?: 'success' | 'error' | 'info';  // The type of notification (default: 'info')
-  duration?: number;  // How long to show the notification in milliseconds (default: 5000)
+  title: string; // The title of the notification
+  body: string; // The message content
+  type?: "success" | "error" | "info"; // The type of notification (default: 'info')
+  duration?: number; // How long to show the notification in milliseconds (default: 5000)
 }
 ```
 
 ## Examples
 
 ### 1. Basic Notification
+
 ```typescript
 (window as any).showCustomNotification({
-  title: 'Hello!',
-  body: 'This is a basic notification',
+  title: "Hello!",
+  body: "This is a basic notification",
 });
 ```
 
 ### 2. Success Notification
+
 ```typescript
 (window as any).showCustomNotification({
-  title: 'Success!',
-  body: 'Operation completed successfully',
-  type: 'success',
+  title: "Success!",
+  body: "Operation completed successfully",
+  type: "success",
 });
 ```
 
 ### 3. Error Notification
+
 ```typescript
 (window as any).showCustomNotification({
-  title: 'Error',
-  body: 'Something went wrong',
-  type: 'error',
+  title: "Error",
+  body: "Something went wrong",
+  type: "error",
   duration: 8000, // Show for 8 seconds
 });
 ```
@@ -64,6 +70,7 @@ interface NotificationOptions {
 ## Common Use Cases
 
 ### 1. On User Action
+
 ```typescript
 function DownloadButton() {
   const handleDownload = () => {
@@ -80,14 +87,15 @@ function DownloadButton() {
 ```
 
 ### 2. On Timer
+
 ```typescript
 function TimerNotification() {
   useEffect(() => {
     const timer = setTimeout(() => {
       (window as any).showCustomNotification({
-        title: 'Time\'s Up!',
-        body: 'Your session has ended',
-        type: 'info',
+        title: "Time's Up!",
+        body: "Your session has ended",
+        type: "info",
       });
     }, 3600000); // 1 hour
 
@@ -97,6 +105,7 @@ function TimerNotification() {
 ```
 
 ### 3. On API Response
+
 ```typescript
 function TrackUploader() {
   const handleUpload = async () => {
@@ -104,15 +113,15 @@ function TrackUploader() {
       // Your upload logic here
       await uploadTrack();
       (window as any).showCustomNotification({
-        title: 'Upload Success',
-        body: 'Your track has been uploaded successfully!',
-        type: 'success',
+        title: "Upload Success",
+        body: "Your track has been uploaded successfully!",
+        type: "success",
       });
     } catch (error) {
       (window as any).showCustomNotification({
-        title: 'Upload Failed',
-        body: 'There was an error uploading your track',
-        type: 'error',
+        title: "Upload Failed",
+        body: "There was an error uploading your track",
+        type: "error",
       });
     }
   };
@@ -143,7 +152,7 @@ The notifications use Bulma CSS classes and can be customized by modifying the `
 - Position: Top-right corner
 - Maximum width: 400px
 - Spacing: 10px between notifications
-- Colors: 
+- Colors:
   - Success: Green background
   - Error: Red background
   - Info: Blue background
@@ -159,4 +168,4 @@ If notifications aren't showing:
 2. Check the browser console for any errors
 3. Verify that the notification call is being made correctly
 4. Make sure you're not calling the notification function before the container is mounted
-5. Add a small delay (100ms) if calling the notification immediately after component mount 
+5. Add a small delay (100ms) if calling the notification immediately after component mount

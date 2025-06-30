@@ -1,4 +1,9 @@
-import { faInstagram, faYoutube, faSoundcloud, faSpotify } from '@fortawesome/free-brands-svg-icons'
+import {
+  faInstagram,
+  faYoutube,
+  faSoundcloud,
+  faSpotify,
+} from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import Hyperlink from "@/types/Hyperlinks";
 
@@ -32,5 +37,5 @@ export const socialNetworks: Hyperlink[] = [
     type: "email",
     url: "mailto:musicdjkat@gmail.com",
     icon: faEnvelope,
-  }
-]; 
+  },
+];

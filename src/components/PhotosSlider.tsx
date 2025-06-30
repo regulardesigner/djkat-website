@@ -1,32 +1,31 @@
-import { useEffect, useRef, useState } from 'react';
-import ReactSwipe from 'react-swipe';
+import { useEffect, useRef, useState } from "react";
+import ReactSwipe from "react-swipe";
 
-import djKat from '@assets/image-slider/dj_kat.png';
-import djKatStudio from '@assets/image-slider/dj_kat_studio.png';
-import djSetTremplin from '@assets/image-slider/dj_set_tremplin.png';
-import djSetSceneOuverte from '@assets/image-slider/dj_set_scene_ouverte.png';
+import djKat from "@assets/image-slider/dj_kat.png";
+import djKatStudio from "@assets/image-slider/dj_kat_studio.png";
+import djSetTremplin from "@assets/image-slider/dj_set_tremplin.png";
+import djSetSceneOuverte from "@assets/image-slider/dj_set_scene_ouverte.png";
 
-import './PhotosSlider.css';
+import "./PhotosSlider.css";
 
 const images = [
   {
     src: djKat,
-    alt: 'DJ Kat'
+    alt: "DJ Kat",
   },
   {
     src: djKatStudio,
-    alt: 'DJ Kat in studio'
+    alt: "DJ Kat in studio",
   },
   {
     src: djSetTremplin,
-    alt: 'DJ set at Tremplin'
+    alt: "DJ set at Tremplin",
   },
   {
     src: djSetSceneOuverte,
-    alt: 'DJ set at Scene Ouverte'
-  }
+    alt: "DJ set at Scene Ouverte",
+  },
 ];
-
 
 function PhotosSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -35,7 +34,7 @@ function PhotosSlider() {
 
   function goNextSlide() {
     const nextIndex = (currentIndex + 1) % images.length;
-    setCurrentIndex(nextIndex); 
+    setCurrentIndex(nextIndex);
     swipeRef.current?.next();
   }
 
@@ -74,12 +73,8 @@ function PhotosSlider() {
         }}
       >
         {images.map((image, index) => (
-          <div key={index} style={{ width: '100%', height: '100%' }}>
-            <img
-              src={image.src}
-              alt={image.alt}
-              className="slider-image"
-            />
+          <div key={index} style={{ width: "100%", height: "100%" }}>
+            <img src={image.src} alt={image.alt} className="slider-image" />
           </div>
         ))}
       </ReactSwipe>

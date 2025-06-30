@@ -4,7 +4,7 @@ interface Hyperlink {
   type?: "link" | "button" | "email";
   label?: string;
   alt?: string;
-  icon?: any; 
+  icon?: any;
 }
 
 export default Hyperlink;
