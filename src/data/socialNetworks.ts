@@ -9,18 +9,6 @@ import Hyperlink from "@/types/Hyperlinks";
 
 export const socialNetworks: Hyperlink[] = [
   {
-    name: "Instagram",
-    type: "link",
-    url: "https://www.instagram.com/dj_kat_official/",
-    icon: faInstagram,
-  },
-  {
-    name: "Youtube",
-    type: "link",
-    url: "https://www.youtube.com/@DJKAT909",
-    icon: faYoutube,
-  },
-  {
     name: "Soundcloud",
     type: "link",
     url: "https://soundcloud.com/dj_kat_official",
@@ -31,6 +19,18 @@ export const socialNetworks: Hyperlink[] = [
     type: "link",
     url: "https://open.spotify.com/intl-fr/artist/3edwtEfH0EeArhL0V4wedI",
     icon: faSpotify,
+  },
+  {
+    name: "Instagram",
+    type: "link",
+    url: "https://www.instagram.com/dj_kat_official/",
+    icon: faInstagram,
+  },
+  {
+    name: "Youtube",
+    type: "link",
+    url: "https://www.youtube.com/@DJKAT909",
+    icon: faYoutube,
   },
   {
     name: "Contact",
