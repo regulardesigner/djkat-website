@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, type CSSProperties } from "react";
 import ReactSwipe from "react-swipe";
 
 import djKat from "@assets/image-slider/dj_kat.webp";
@@ -54,16 +54,6 @@ function PhotosSlider() {
     }),
     [],
   );
-
-  useEffect(() => {
-    if (!isPlaying || isInteracting) return;
-
-    const interval = setInterval(
-      () => swipeRef.current?.next(),
-      AUTOPLAY_DELAY,
-    );
-    return () => clearInterval(interval);
-  }, [isPlaying, isInteracting]);
 
   return (
     <section
@@ -123,6 +113,22 @@ function PhotosSlider() {
         className="button is-small is-dark slider-toggle"
       >
         {isPlaying ? "Pause slideshow" : "Play slideshow"}
+        {isPlaying && (
+          // The bar's animation is the autoplay timer: the next slide is
+          // shown when it ends. Keyed by slide so it restarts on every change.
+          <span
+            key={activeIndex}
+            className="slider-toggle__progress"
+            aria-hidden="true"
+            style={
+              {
+                "--autoplay-delay": `${AUTOPLAY_DELAY}ms`,
+                animationPlayState: isInteracting ? "paused" : "running",
+              } as CSSProperties
+            }
+            onAnimationEnd={() => swipeRef.current?.next()}
+          />
+        )}
       </button>
     </section>
   );

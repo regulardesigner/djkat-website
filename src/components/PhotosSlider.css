@@ -66,6 +66,28 @@
   bottom: 8px;
   left: 8px;
   opacity: 0.85;
+  /* Clip the progress bar to the rounded corners. */
+  overflow: hidden;
+}
+
+.slider-toggle__progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 100%;
+  background-color: var(--bulma-warning);
+  transform-origin: left;
+  animation: slider-progress var(--autoplay-delay) linear forwards;
+}
+
+@keyframes slider-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
 }
 
 .slider-container .slider-toggle:hover,
