@@ -1,12 +1,12 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
-import { ghPages } from 'vite-plugin-gh-pages'
 
 // https://vite.dev/config/
+// Deployment is explicit (`npm run deploy`); building never publishes.
 export default defineConfig({
   base: '/',
-  plugins: [react(), ghPages()],
+  plugins: [react()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -14,7 +14,7 @@ export default defineConfig({
       '@assets': path.resolve(__dirname, './src/assets'),
       '@layouts': path.resolve(__dirname, './src/layouts'),
       '@styles': path.resolve(__dirname, './src/styles'),
-      '@tests': path.resolve(__dirname, './tests'),
+      '@tests': path.resolve(__dirname, './src/tests'),
     },
   },
 })
