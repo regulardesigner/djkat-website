@@ -17,6 +17,11 @@
   animation: slideIn 0.3s ease-out;
 }
 
+.notification .title,
+.notification .subtitle {
+  color: inherit;
+}
+
 .notification .delete {
   position: absolute;
   right: 0.5rem;
@@ -31,5 +36,11 @@
   to {
     transform: translateX(0);
     opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notification {
+    animation: none;
   }
 }
