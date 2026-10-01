@@ -2,7 +2,7 @@
 
 ## Overview
 
-The notification system provides a flexible way to show custom-styled notifications in your application. It uses a custom React component that displays notifications in the top-right corner of the screen.
+The notification system provides a flexible way to show custom-styled notifications in your application. Notifications are provided through React context: `NotificationProvider` (mounted in `main.tsx`) renders them in a polite live region in the bottom-right corner, and any component calls the `useNotify()` hook to show one.
 
 ## Installation
 
@@ -13,12 +13,15 @@ The notification system is already set up in your project. No additional install
 ### 1. Show a Notification
 
 ```typescript
-// Using the global method
-(window as any).showCustomNotification({
+import { useNotify } from "@/contexts/NotificationContext";
+
+const notify = useNotify();
+
+notify({
   title: "Your Title",
   body: "Your message here",
   type: "success", // 'success', 'error', or 'info'
-  duration: 5000, // Duration in milliseconds (default: 5000)
+  duration: 5000, // Duration in milliseconds (default: 8000)
 });
 ```
 
@@ -31,7 +34,7 @@ interface NotificationOptions {
   title: string; // The title of the notification
   body: string; // The message content
   type?: "success" | "error" | "info"; // The type of notification (default: 'info')
-  duration?: number; // How long to show the notification in milliseconds (default: 5000)
+  duration?: number; // How long to show the notification in milliseconds (default: 8000)
 }
 ```
 
@@ -40,7 +43,7 @@ interface NotificationOptions {
 ### 1. Basic Notification
 
 ```typescript
-(window as any).showCustomNotification({
+notify({
   title: "Hello!",
   body: "This is a basic notification",
 });
@@ -49,7 +52,7 @@ interface NotificationOptions {
 ### 2. Success Notification
 
 ```typescript
-(window as any).showCustomNotification({
+notify({
   title: "Success!",
   body: "Operation completed successfully",
   type: "success",
@@ -59,7 +62,7 @@ interface NotificationOptions {
 ### 3. Error Notification
 
 ```typescript
-(window as any).showCustomNotification({
+notify({
   title: "Error",
   body: "Something went wrong",
   type: "error",
@@ -75,7 +78,7 @@ interface NotificationOptions {
 function DownloadButton() {
   const handleDownload = () => {
     // Your download logic here
-    (window as any).showCustomNotification({
+    notify({
       title: 'Download Complete',
       body: 'Your track has been downloaded successfully!',
       type: 'success',
@@ -92,7 +95,7 @@ function DownloadButton() {
 function TimerNotification() {
   useEffect(() => {
     const timer = setTimeout(() => {
-      (window as any).showCustomNotification({
+      notify({
         title: "Time's Up!",
         body: "Your session has ended",
         type: "info",
@@ -112,13 +115,13 @@ function TrackUploader() {
     try {
       // Your upload logic here
       await uploadTrack();
-      (window as any).showCustomNotification({
+      notify({
         title: "Upload Success",
         body: "Your track has been uploaded successfully!",
         type: "success",
       });
     } catch (error) {
-      (window as any).showCustomNotification({
+      notify({
         title: "Upload Failed",
         body: "There was an error uploading your track",
         type: "error",
@@ -143,19 +146,20 @@ function TrackUploader() {
 3. **Multiple Notifications**: Multiple notifications can be shown simultaneously
 4. **Responsive Design**: Works well on both mobile and desktop
 5. **Type-based Styling**: Different colors for different notification types
-6. **Global Access**: Can be triggered from anywhere in the application
+6. **Context Access**: Any component inside `NotificationProvider` can trigger one with `useNotify()`
+7. **Accessible**: Announced politely to screen readers; auto-dismiss pauses on hover and focus
 
 ## Styling
 
 The notifications use Bulma CSS classes and can be customized by modifying the `notifications.css` file. The default styles include:
 
-- Position: Top-right corner
+- Position: Bottom-right corner
 - Maximum width: 400px
 - Spacing: 10px between notifications
 - Colors:
-  - Success: Green background
-  - Error: Red background
-  - Info: Blue background
+  - Success: Green background, dark text
+  - Error: Red background, white text
+  - Info: Amber background, dark text
 - Animation: Slide-in from the right
 - Box shadow for depth
 - Rounded corners
@@ -164,8 +168,6 @@ The notifications use Bulma CSS classes and can be customized by modifying the `
 
 If notifications aren't showing:
 
-1. Ensure the `NotificationContainer` component is mounted in your app
+1. Ensure the component calling `useNotify()` is rendered inside `NotificationProvider` (the hook throws otherwise)
 2. Check the browser console for any errors
 3. Verify that the notification call is being made correctly
-4. Make sure you're not calling the notification function before the container is mounted
-5. Add a small delay (100ms) if calling the notification immediately after component mount

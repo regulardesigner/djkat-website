@@ -1,8 +1,12 @@
 import "@/styles/soundcloudPlayer.css";
 
-import TrackId from "@/types/trackId";
+import SoundcloudPlayerProps from "@/types/trackId";
 
-function SoundcloudPlayer({ trackId }: TrackId) {
+function SoundcloudPlayer({
+  trackId,
+  title,
+  className,
+}: SoundcloudPlayerProps) {
   const src = new URL("https://w.soundcloud.com/player/");
 
   src.searchParams.append(
@@ -21,18 +25,19 @@ function SoundcloudPlayer({ trackId }: TrackId) {
 
   const url = src.toString();
 
-  //TODO: Accessibility: display a player name with the artist name and track name.
   return (
     <div
       data-testid={`soundcloud-player-${trackId}`}
-      className="dj-kat-soundcloud-player is-flex is-justify-content-center is-align-items-center"
+      className={`dj-kat-soundcloud-player is-flex is-justify-content-center is-align-items-center ${className ?? ""}`}
     >
       <iframe
         className="dj-kat-soundcloud-player__iframe"
         width="400"
         height="400"
         src={url}
-        title="Soundcloud Player"
+        title={`SoundCloud player: DJ Kat – ${title}`}
+        loading="lazy"
+        allow="autoplay; encrypted-media"
       />
     </div>
   );

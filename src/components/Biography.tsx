@@ -4,10 +4,13 @@ function Biography() {
   return (
     <section
       data-testid="biography-section"
+      aria-labelledby="biography-heading"
       className="biography columns is-align-items-center is-0-mobile has-text-current mb-6"
     >
       <div className="column is-half is-size-5">
-        <h2 className="is-size-3 has-text-weight-bold">Biography:</h2>
+        <h2 id="biography-heading" className="is-size-3 has-text-weight-bold">
+          Biography:
+        </h2>
 
         <p className="mb-4">
           DJ KAT is already making his mark on the house music scene. A French

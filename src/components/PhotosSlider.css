@@ -6,6 +6,10 @@
   border-radius: 2px;
 }
 
+.slider-viewport {
+  height: 100%;
+}
+
 .slider-wrapper {
   position: relative;
   width: 100%;
@@ -38,7 +42,6 @@
   background-color: rgba(255, 255, 255, 0.7);
   padding: 8px;
   font-size: 0px;
-  text-indent: -1000;
   border-radius: 50%;
   border: none;
   cursor: pointer;
@@ -58,28 +61,43 @@
   right: 8px;
 }
 
-.slider-dots {
+.slider-container .slider-toggle {
   position: absolute;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
+  bottom: 8px;
+  left: 8px;
+  opacity: 0.85;
+  /* Clip the progress bar to the rounded corners. */
+  overflow: hidden;
 }
 
-.slider-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.slider-toggle__progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 100%;
+  background-color: var(--bulma-warning);
+  transform-origin: left;
+  animation: slider-progress var(--autoplay-delay) linear forwards;
 }
 
-.slider-dot.active {
-  background-color: white;
+@keyframes slider-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
 }
 
-.slider-dot.inactive {
-  background-color: rgba(255, 255, 255, 0.5);
+.slider-container .slider-toggle:hover,
+.slider-container .slider-toggle:focus-visible {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slider-image,
+  .slider-button {
+    transition: none;
+  }
 }

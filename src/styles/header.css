@@ -1,11 +1,5 @@
 :root {
-  --banner-image: url(../assets/djkat_banner.png);
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    /* --banner-image: url(../assets/djkat_banner_light.jpg); */
-  }
+  --banner-image: url(../assets/djkat_banner.webp);
 }
 
 .djkat-logo {
@@ -21,11 +15,9 @@
 @media (max-width: 64rem) {
   .hero-djkat {
     height: 16rem;
-    background-image: cover;
   }
 
   .image-logo {
-    width: auto;
     max-height: 14rem;
   }
 }
