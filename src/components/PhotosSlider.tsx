@@ -1,12 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import ReactSwipe from "react-swipe";
 
-import djKat from "@assets/image-slider/dj_kat.png";
-import djKatStudio from "@assets/image-slider/dj_kat_studio.png";
-import djSetTremplin from "@assets/image-slider/dj_set_tremplin.png";
-import djSetSceneOuverte from "@assets/image-slider/dj_set_scene_ouverte.png";
+import djKat from "@assets/image-slider/dj_kat.webp";
+import djKatStudio from "@assets/image-slider/dj_kat_studio.webp";
+import djSetTremplin from "@assets/image-slider/dj_set_tremplin.webp";
+import djSetSceneOuverte from "@assets/image-slider/dj_set_scene_ouverte.webp";
 
 import "./PhotosSlider.css";
+
+const AUTOPLAY_DELAY = 15000;
+const IMAGE_WIDTH = 1200;
+const IMAGE_HEIGHT = 912;
 
 const images = [
   {
@@ -27,72 +31,100 @@ const images = [
   },
 ];
 
+function prefersReducedMotion() {
+  return window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+}
+
 function PhotosSlider() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
   const swipeRef = useRef<ReactSwipe>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(() => !prefersReducedMotion());
+  const [isInteracting, setIsInteracting] = useState(false);
 
-  function goNextSlide() {
-    const nextIndex = (currentIndex + 1) % images.length;
-    setCurrentIndex(nextIndex);
-    swipeRef.current?.next();
-  }
-
-  function goPreviousSlide() {
-    const prevIndex = (currentIndex - 1 + images.length) % images.length;
-    setCurrentIndex(prevIndex);
-    swipeRef.current?.prev();
-  }
-
-  function goToSlide(index: number) {
-    setCurrentIndex(index);
-    swipeRef.current?.slide(index, 0);
-  }
-
-  function autoSlider() {
-    const interval = setInterval(goNextSlide, 15000);
-    return () => clearInterval(interval);
-  }
+  // react-swipe re-creates the slider whenever these options change,
+  // so they must stay referentially stable across renders.
+  const swipeOptions = useMemo(
+    () => ({
+      continuous: true,
+      disableScroll: false,
+      stopPropagation: false,
+      speed: prefersReducedMotion() ? 0 : 500,
+      startSlide: 0,
+      callback: (index: number) => setActiveIndex(index),
+    }),
+    [],
+  );
 
   useEffect(() => {
-    return autoSlider();
-  });
+    if (!isPlaying || isInteracting) return;
+
+    const interval = setInterval(
+      () => swipeRef.current?.next(),
+      AUTOPLAY_DELAY,
+    );
+    return () => clearInterval(interval);
+  }, [isPlaying, isInteracting]);
 
   return (
-    <div className="slider-container">
-      <ReactSwipe
-        ref={swipeRef}
-        className="slider-wrapper"
-        swipeOptions={{
-          continuous: true,
-          auto: 15000,
-          disableScroll: false,
-          stopPropagation: false,
-          speed: 500,
-          startSlide: 0,
-        }}
-      >
-        {images.map((image, index) => (
-          <div key={index} style={{ width: "100%", height: "100%" }}>
-            <img src={image.src} alt={image.alt} className="slider-image" />
-          </div>
-        ))}
-      </ReactSwipe>
+    <section
+      className="slider-container"
+      aria-roledescription="carousel"
+      aria-label="Photos of DJ Kat"
+      onMouseEnter={() => setIsInteracting(true)}
+      onMouseLeave={() => setIsInteracting(false)}
+      onFocus={() => setIsInteracting(true)}
+      onBlur={() => setIsInteracting(false)}
+    >
+      <div className="slider-viewport" aria-live={isPlaying ? "off" : "polite"}>
+        <ReactSwipe
+          ref={swipeRef}
+          className="slider-wrapper"
+          swipeOptions={swipeOptions}
+        >
+          {images.map((image, index) => (
+            <div
+              key={image.src}
+              style={{ width: "100%", height: "100%" }}
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${index + 1} of ${images.length}`}
+              aria-hidden={index !== activeIndex}
+            >
+              <img
+                src={image.src}
+                alt={image.alt}
+                width={IMAGE_WIDTH}
+                height={IMAGE_HEIGHT}
+                loading={index === 0 ? "eager" : "lazy"}
+                decoding="async"
+                className="slider-image"
+              />
+            </div>
+          ))}
+        </ReactSwipe>
+      </div>
       <button
-        onClick={goPreviousSlide}
+        type="button"
+        onClick={() => swipeRef.current?.prev()}
         className="slider-button prev"
-        aria-label="Previous slide"
       >
-        previous photo
+        Previous photo
       </button>
       <button
-        onClick={goNextSlide}
+        type="button"
+        onClick={() => swipeRef.current?.next()}
         className="slider-button next"
-        aria-label="Next slide"
       >
-        next photo
+        Next photo
       </button>
-    </div>
+      <button
+        type="button"
+        onClick={() => setIsPlaying((playing) => !playing)}
+        className="button is-small is-dark slider-toggle"
+      >
+        {isPlaying ? "Pause slideshow" : "Play slideshow"}
+      </button>
+    </section>
   );
 }
 

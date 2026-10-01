@@ -1,71 +1,72 @@
-import { render, screen, waitFor } from "@testing-library/react";
-import { describe, it, expect, beforeEach, vi } from "vitest";
+import { render, screen, within } from "@testing-library/react";
+import { describe, it, expect } from "vitest";
 import App from "../App";
+import NotificationProvider from "../components/NotificationProvider";
 import { tracks } from "../data/tracks";
 
-// Mock the window.showCustomNotification function
-const mockShowCustomNotification = vi.fn();
-(window as any).showCustomNotification = mockShowCustomNotification;
+function renderApp() {
+  return render(
+    <NotificationProvider>
+      <App />
+    </NotificationProvider>,
+  );
+}
 
 describe("App Component", () => {
-  beforeEach(() => {
-    // Clear all mocks before each test
-    vi.clearAllMocks();
-  });
-
   it("renders all main components", () => {
-    render(<App />);
+    renderApp();
 
-    // Check if main components are rendered
     expect(screen.getByRole("main")).toBeInTheDocument();
     expect(screen.getByText("Last Releases:")).toBeInTheDocument();
-    expect(screen.getByText("Listen more on soundcloud")).toBeInTheDocument();
+    expect(screen.getByText(/Listen more on soundcloud/)).toBeInTheDocument();
   });
 
   it("renders all tracks from the data file", () => {
-    render(<App />);
+    renderApp();
 
-    // Check if all tracks are rendered
     tracks.forEach((track) => {
       expect(
         screen.getByTestId(`soundcloud-player-${track.id}`),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByTitle(`SoundCloud player: DJ Kat – ${track.title}`),
       ).toBeInTheDocument();
     });
   });
 
   it("shows welcome notification on mount", async () => {
-    render(<App />);
+    renderApp();
 
-    // Wait for notification content to appear
-    await waitFor(
-      () => {
-        expect(
-          screen.getByText("Welcome French-Touch Lovers! 🎵"),
-        ).toBeInTheDocument();
-        expect(
-          screen.getByText("Thank you for visiting! Enjoy the music."),
-        ).toBeInTheDocument();
-      },
-      { timeout: 150 },
-    ); // Set timeout slightly higher than the 100ms delay
+    const status = screen.getByRole("status");
+    expect(
+      await within(status).findByText("Welcome French-Touch Lovers! 🎵"),
+    ).toBeInTheDocument();
+    expect(
+      within(status).getByText("Thank you for visiting! Enjoy the music."),
+    ).toBeInTheDocument();
   });
 
-  it("has correct social network links", () => {
-    render(<App />);
+  it("opens external links safely in a new tab", () => {
+    renderApp();
 
-    // Check if social network links are present and have correct attributes
-    const socialLinks = screen.getAllByRole("link");
-    expect(socialLinks.length).toBeGreaterThan(0);
+    const links = screen.getAllByRole("link");
+    expect(links.length).toBeGreaterThan(0);
 
-    socialLinks.forEach((link) => {
+    links.forEach((link) => {
+      if (link.getAttribute("href")?.startsWith("mailto:")) {
+        expect(link).not.toHaveAttribute("target");
+        return;
+      }
       expect(link).toHaveAttribute("target", "_blank");
+      expect(link).toHaveAttribute("rel", "noopener noreferrer");
     });
   });
 
   it("renders biography section", () => {
-    render(<App />);
+    renderApp();
 
-    // Check if biography section is present
-    expect(screen.getByTestId("biography-section")).toBeInTheDocument();
+    expect(
+      screen.getByRole("region", { name: "Biography:" }),
+    ).toBeInTheDocument();
   });
 });

@@ -1,7 +1,8 @@
-// TrackId is used in the props of the SoundcloudPlayer component
-interface TrackId {
+// Props of the SoundcloudPlayer component
+interface SoundcloudPlayerProps {
   trackId: string;
+  title: string;
   className?: string;
 }
 
-export default TrackId;
+export default SoundcloudPlayerProps;
